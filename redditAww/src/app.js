@@ -1,8 +1,7 @@
-let currentPage = 1;
-const limit = 25;
+let pageid = "";
 
-function fetchRedditData() {
-  fetch("https://www.reddit.com/r/aww/.json", {
+function fetchRedditData(id) {
+  fetch(`https://www.reddit.com/r/aww/.json?after=t3_${id}`, {
     method: "GET",
   })
     .then((res) => res.json())
@@ -20,6 +19,7 @@ function fetchRedditData() {
           subreddit: originalSubreditPage,
           hyperlink: link,
         };
+        pageid = id;
         return post;
       });
       redditListContainer(posts);
@@ -47,7 +47,6 @@ function redditListContainer(posts) {
 //this is the redditListContainer component
 function RedditListItem(post) {
   //skeleton for post to hold the  contents
-
   const skelePost = document.createElement("div");
   skelePost.classList.add("redditListItem");
 
@@ -69,5 +68,20 @@ function RedditListItem(post) {
 
   return skelePost;
 }
+let i = true;
+//infinite scrolling logic
+const handleInfiniteScroll = () => {
+  const pageEnd =
+    window.innerHeight + window.pageYOffset >= document.body.offsetHeight;
+  if (pageEnd && i) {
+    i = false;
+    fetchRedditData(pageid);
+    setTimeout(function () {
+      i = true;
+    }, 500);
+  }
+};
+
+window.addEventListener("scroll", handleInfiniteScroll);
 
 fetchRedditData();
