@@ -2,12 +2,7 @@
 let pageid = "";
 
 function fetchRedditData(id) {
-  if (pageid) {
-    fetchPage = "https://www.reddit.com/r/aww/.json";
-  } else {
-    fetchPage = `https://www.reddit.com/r/aww/.json?after=t3_${id}`;
-  }
-  fetch(fetchPage, {
+  fetch(`https://www.reddit.com/r/aww/.json?after=t3_${id}`, {
     method: "GET",
   })
     .then((res) => res.json())
