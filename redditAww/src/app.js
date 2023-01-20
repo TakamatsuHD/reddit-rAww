@@ -1,7 +1,13 @@
+//each post has an id and to get to the next page you need the last id of the initial post which we dont have yet
 let pageid = "";
 
 function fetchRedditData(id) {
-  fetch(`https://www.reddit.com/r/aww/.json?after=t3_${id}`, {
+  if (pageid) {
+    fetchPage = "https://www.reddit.com/r/aww/.json";
+  } else {
+    fetchPage = `https://www.reddit.com/r/aww/.json?after=t3_${id}`;
+  }
+  fetch(fetchPage, {
     method: "GET",
   })
     .then((res) => res.json())
@@ -34,11 +40,8 @@ function redditListContainer(posts) {
   const postContainer = document.createElement("div");
   postContainer.classList.add("redditListContainer");
   posts.forEach((post) => {
-    console.log(post);
-    let postDiv = document.createElement("div");
     let postItem = RedditListItem(post);
-    postDiv.appendChild(postItem);
-    postContainer.appendChild(postDiv);
+    postContainer.appendChild(postItem);
   });
 
   document.body.appendChild(postContainer);
@@ -75,7 +78,8 @@ const handleInfiniteScroll = () => {
     window.innerHeight + window.pageYOffset >= document.body.offsetHeight;
   if (pageEnd && i) {
     i = false;
-    fetchRedditData(pageid);
+    fetchRedditData(pageid); //adding the page id now will cause us to load the next page because the pageid is now set last id that was last rendered
+    //need this function so scroll events don't get triggered multiple times in one scroll
     setTimeout(function () {
       i = true;
     }, 500);

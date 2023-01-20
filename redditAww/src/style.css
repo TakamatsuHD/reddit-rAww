@@ -9,10 +9,11 @@ body {
 }
 
 .redditListContainer {
-  /* padding-top: 3rem; */
-  padding-left: 1rem;
-  padding-right: 1rem;
-  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 50%;
   margin: auto;
 }
 
