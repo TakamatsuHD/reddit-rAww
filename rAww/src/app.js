@@ -34,7 +34,6 @@ function redditListContainer(posts) {
   const postContainer = document.createElement("div");
   postContainer.classList.add("redditListContainer");
   posts.forEach((post) => {
-    //dont need to return anything so  dont need map
     console.log(post);
     let postDiv = document.createElement("div");
     let postItem = RedditListItem(post);
@@ -48,6 +47,7 @@ function redditListContainer(posts) {
 //this is the redditListContainer component
 function RedditListItem(post) {
   //skeleton for post to hold the  contents
+
   const skelePost = document.createElement("div");
   skelePost.classList.add("redditListItem");
 
