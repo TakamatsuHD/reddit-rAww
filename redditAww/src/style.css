@@ -24,7 +24,7 @@ body {
 .redditListContainer {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 100%;
   margin: auto;
 }
 
@@ -70,7 +70,8 @@ a:hover {
   margin: auto;
   border: 1px solid;
   border-radius: 0.3rem;
-  width: 40%;
+  width: 90%;
+  max-width: 20rem;
   height: auto;
 }
 
