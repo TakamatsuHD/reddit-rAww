@@ -64,10 +64,12 @@ function RedditListItem(post) {
   origin.textContent = `r/${post.subreddit}`;
   skelePost.appendChild(origin);
 
-  const picture = document.createElement("img");
-  picture.classList.add("redditListItemPicture");
-  picture.setAttribute("src", post.thumbnail);
-  skelePost.appendChild(picture);
+  if (post.thumbnail !== "self") {
+    const picture = document.createElement("img");
+    picture.classList.add("redditListItemPicture");
+    picture.setAttribute("src", post.thumbnail);
+    skelePost.appendChild(picture);
+  }
 
   return skelePost;
 }
